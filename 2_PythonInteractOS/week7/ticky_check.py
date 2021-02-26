@@ -30,8 +30,22 @@ with open('syslog.log') as file:
             if result[2] not in error:
                 error[result[2]] = 0
             error[result[2]] += 1
-        
-        print("{} {} {}".format(result[1], result[2], result[3]))
 
-print(sorted(per_user.items()))
-print(sorted(error.items(), key = operator.itemgetter(1), reverse=True))
+# Sorted dictionary
+per_user = sorted(per_user.items())
+error = sorted(error.items(), key = operator.itemgetter(1), reverse=True)
+print(per_user)
+print(error)
+
+# Write into csv
+with open('error_message.csv', mode='w') as csv_file:
+    writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    writer.writerow(['Error', 'Count'])
+    for err in error:
+        writer.writerow(err)
+
+with open('user_statistics.csv', mode='w') as csv_file:
+    writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    writer.writerow(['Username', 'INFO', 'ERROR'])
+    for usr in per_user:
+        writer.writerow([usr[0], usr[1][0], usr[1][1]])
