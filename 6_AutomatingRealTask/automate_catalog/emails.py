@@ -6,7 +6,7 @@ import os.path
 import smtplib
 
 
-def generate(sender, recipient, subject, body, attachment_path=None):
+def generate_email(sender, recipient, subject, body, attachment_path=None):
     """Creates an email with an attachement."""
     # Basic Email formatting
     message = email.message.EmailMessage()
@@ -30,7 +30,7 @@ def generate(sender, recipient, subject, body, attachment_path=None):
     return message
 
 
-def send(message):
+def send_email(message):
     """Sends the message to the configured SMTP server."""
     mail_server = smtplib.SMTP('localhost')
     mail_server.send_message(message)
