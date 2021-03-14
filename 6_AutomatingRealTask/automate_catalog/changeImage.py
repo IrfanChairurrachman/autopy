@@ -16,7 +16,7 @@ def edit_image(source, x=600, y=400):
                 print("Can't edit {} because {}".format(f, e))
 
 if __name__ == '__main__':
-    source = 'images'
+    source = 'supplier-data/images/'
     edit_image(source)
 
         
