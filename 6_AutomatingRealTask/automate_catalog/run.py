@@ -7,7 +7,7 @@ import requests
 
 def generate_description(dir, url):
     
-    descriptions = []
+    fruits = []
 
     for txt in os.listdir(dir):
         with open('{}/{}'.format(dir, txt)) as txt_file:
@@ -18,21 +18,20 @@ def generate_description(dir, url):
 
             weight = int(re.search(r"^(\d+)", lines[1].strip()).group())
 
-            descriptions.append({
+            fruits.append({
                 "name": lines[0].strip(),
                 "weight": weight,
                 "description": "".join(lines[2:]).strip(),
                 "image_name": txt.replace(".txt", ".jpeg")
             })
 
-    for description in descriptions:
-        response = requests.post(url, json=description)
+    for fruit in fruits:
+        response = requests.post(url, json=fruit)
         if not response.ok:
-            raise Exception("FAILED to POST, reponse: {}, text title: {}".format(response.status_code, description['name']))
-        print("Feedback title: {} added!, response: {}".format(description['title'], response.status_code))
+            raise Exception("FAILED to POST, reponse: {}, fruit: {}".format(response.status_code, fruit['name']))
+        print("Fruit: {} added!, response: {}".format(fruit['name'], response.status_code))
 
 if __name__ == "__main__":
-    descriptions = getDescriptions('supplier-data/descriptions')
     dir = 'supplier-data/descriptions'
     url = 'http://localhost/fruits/'
     generate_description(dir, url)
