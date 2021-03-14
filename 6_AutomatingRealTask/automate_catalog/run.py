@@ -36,7 +36,3 @@ if __name__ == "__main__":
     dir = 'supplier-data/descriptions'
     url = 'http://localhost/fruits/'
     generate_description(dir, url)
-    # for description in descriptions:
-    #     print("Fruit description: {}".format(description))
-    #     response = requests.post(url, json=description)
-    #     # uploadDescription('http://localhost/fruits/', description)
